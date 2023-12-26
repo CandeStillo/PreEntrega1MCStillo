@@ -1,10 +1,10 @@
 import React from 'react'
-import ItemList from './ItemList'
+import ItemDetail from './ItemDetail'
 import './ItemListContainer.css'
 import { useParams } from 'react-router-dom'
-const ItemListContainer = ({greeting}) => {
-  const {categoriaId} = useParams ()
-  console.log(categoriaId)
+
+const ItemDetailContainer = ({greeting}) => {
+  const {id} = useParams()
 
   const productos = [
     {id: 1, titulo: "Producto A", descripcion: "descripcion de Producto A", precio: 1000},
@@ -28,18 +28,21 @@ const ItemListContainer = ({greeting}) => {
     .catch((error) => {
       console.log(error)
     })
-    
-    const productosFiltrados = productos.filter((producto) => producto.categoria == categoriaId)
-    console.log(productosFiltrados)
 
+
+    const productoFiltrado = productos.find((producto) => producto.id == id)
 
   return (
-    <div className='container'>
-      {
-      categoriaId ? <ItemList productos={productosFiltrados}/> : <ItemList key={productos.id} productos={productos}/> 
-      } 
+    <div>
+      <div className='container'>
+        <ItemDetail
+        /* key={p.id} */
+        producto={productoFiltrado}
+        />
+      </div>
+    
     </div>
   )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer

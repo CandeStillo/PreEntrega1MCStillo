@@ -1,26 +1,34 @@
 import React from 'react'
 import Item from './Item'
+import { Container } from '@chakra-ui/react'
 
-const ItemList = ({productos}) => {
+const ItemList = ({celus}) => {
     
   return (
     <div>
+      <Container className='main-catalogue'>
       {
-        productos.map((p) => {
+        celus.map((celu) => {
           return(
-            <div>
+            <div key={celu.id}>
               
              <Item
-             key={p.id}
-             titulo = {p.titulo}
-             id={p.id}
+             key={celu.id}
+             titulo = {celu.titulo}
+             id={celu.id}
+             precio={celu.precio}
+             descripcion={celu.descripcion}
+             categoria={celu.categoria}
+             image={celu.image}
              />
             </div>
           )
         })
       }
+        
+      </Container>
     </div>
   )
 }
 
-export default ItemList
+export default React.memo(ItemList)
